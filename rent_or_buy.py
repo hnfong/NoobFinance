@@ -60,7 +60,7 @@ print "Present cost of mortgage to me is:", present_cost_of_morgage
 present_cost_of_buying_flat = present_cost_of_morgage + first_installment_budget
 print "Present cost of buying flat (inc. first install):", present_cost_of_buying_flat
 
-# present value of flat, using the "frying formula", i.e. assume property appreciation != interest rates I can get
+# present value of flat, using the "frying formula", i.e. assume property appreciation != safe interest rates I can get
 future_value_of_flat_when_mortgage_ends = future_value_of_present_sum(current_market_value_of_flat, mortgage_term_in_years, property_avg_yearly_appreciation_rate_after_x_years)
 present_value_of_flat_if_sold_right_after_mortgage = present_value_of_future_sum(future_value_of_flat_when_mortgage_ends, mortgage_term_in_years, my_yearly_interest)
 
