@@ -20,6 +20,7 @@ of the software. All other rights are expressly reserved.
 # - Property tax not yet included.
 # - "Rates" (chai heung) not included. Management fees not included.
 # - Administrative costs not included.
+# - Risks of renting to other people not included.
 ### Other omissions might be here too.
 
 ############################################
@@ -48,11 +49,11 @@ print "Mortgage term is", mortgage_term_in_years, "years."
 # Present value of flat sold after n years #
 ############################################
 # concept:
-# a mortgage is a contract for a flat after N years if you pay $x every month for N years.
+# a mortgage is a contract for full ownership of a flat after N years if you pay $x every month for N years.
 # so, I give: $x every month for N years
 # I get: flat after N years
 
-# cost to me
+# cost to me  (XXX: supposedly the value of this to the bank should be the same as cost to me!! Is it really the case here. Why or why not?)
 present_cost_of_morgage = present_value_of_annuity(monthly_morgage_payment_budget, mortgage_term_in_months, my_yearly_interest / 12)
 print "Present cost of mortgage to me is:", present_cost_of_morgage
 
@@ -78,12 +79,14 @@ print "Present value of flat if sold right after mortgage:", present_value_of_fl
 # If used as own home, this value should be the present value of utility of having a home for N years
 # If used as own home, but I can live under worse conditions, then this value should be the rent of a flat I can minimally bear.
 
-monthly_rent_of_flat = VARIABLE(7000, "monthly rent of flat (see comments!)")  # the value and subject of renting depends on how we want to use this variable.
+monthly_rent_of_flat = VARIABLE(5000, "monthly rent of flat (see comments!)")  # the value and subject of renting depends on how we want to use this variable.
 present_utility_value_of_the_purchased_flat_for_n_years = mortgage_term_in_months * monthly_rent_of_flat
+
+print "Present utility value of rent for", mortgage_term_in_years, "years: ", present_utility_value_of_the_purchased_flat_for_n_years
 
 net_value_of_mortgaging = present_value_of_flat_if_sold_right_after_mortgage + present_utility_value_of_the_purchased_flat_for_n_years - present_cost_of_buying_flat
 
-print "Net value of mortgaging:", net_value_of_mortgaging, "( don't buy flat now if negative! )"
+print "Net value of mortgaging to buy flat:", net_value_of_mortgaging, "( don't buy flat now if negative! )"
 
 ## Print the values after N years for comparison
 # print "INFO: Nominal total sum paid to bank over N years:", mortgage_term_in_months * monthly_morgage_payment_budget
