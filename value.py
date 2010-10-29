@@ -23,7 +23,9 @@ def future_value_of_present_sum(p,n,i):
     return 1.0 * p * ((1.0 + i) ** n)
 
 # this is more of a annotation to indicate the meaning of a value, in this case, means this value is a variable, instead of a derived value.
-def VARIABLE(a):
+def VARIABLE(a, name = ""):
+    if name:
+        print "Variable [%s] =" % name, a
     return a
 
 
