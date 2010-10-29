@@ -10,8 +10,7 @@ print "(Note: negative value are costs.)"
 # variables
 my_yearly_interest = VARIABLE(0.02)                # this is the interest rate I can get from safe deposit/investments
 number_of_years_of_renting = VARIABLE(10)
-monthly_rent_of_flat = VARIABLE(9000)
-
+monthly_rent_of_flat = VARIABLE(6000)              # this value should correspond to market value of same flat as the one to be purchased for meaningful comparison
 
 def value_of_n_years_rent_():
     # this period is one month
@@ -30,7 +29,8 @@ print "Current value of", number_of_years_of_renting , "years of rent:", value_o
 ############################################
 # XXX: this is one very bad way of doing things....
 # btw, may be able to somehow be derived...? or just set it equal to the best rent I can get?
-utility_of_living_for_n_years = VARIABLE(978117)
+# utility_of_living_for_n_years = VARIABLE(978117)
+utility_of_living_for_n_years = value_of_n_years_rent
 
 print "My utility for having a home for", number_of_years_of_renting, "years: ", utility_of_living_for_n_years
 print "Net value to me, renting a home for", number_of_years_of_renting, "years: ", utility_of_living_for_n_years - value_of_n_years_rent
@@ -42,9 +42,9 @@ print "Net value to me, renting a home for", number_of_years_of_renting, "years:
 # For fixed monthly payment
 # Ref: http://en.wikipedia.org/wiki/Mortgage_calculator#Monthly_payment_formula
 
-bank_yearly_interest = VARIABLE(0.07)              # this is the interest my bank charges me
+bank_yearly_interest = VARIABLE(0.10)              # this is the interest my bank charges me
 current_price_of_flat = VARIABLE(3000 * 600)       # this value should refer to market value of same flat as the rent for meaningful comparison
-property_avg_yearly_appreciation_rate_after_x_years = VARIABLE(0.02) # this is likely a wild guess
+property_avg_yearly_appreciation_rate_after_x_years = VARIABLE(0.02) # this is likely a wild guess, it should be safely set to be inflation rate
 first_installment_budget = VARIABLE(30*10000)      # money I have now to put into first installment
 monthly_morgage_payment_budget = VARIABLE(20000)   # money I can pay monthly for morgage payments
 
@@ -65,30 +65,29 @@ print "Mortgage term is", mortgage_term_in_years, "years."
 # I get: flat after N years
 
 # cost to me
-present_cost_of_morgage = present_value_of_annuity(monthly_morgage_payment_budget, mortgage_term_in_months, my_yearly_interest)
+present_cost_of_morgage = present_value_of_annuity(monthly_morgage_payment_budget, mortgage_term_in_months, my_yearly_interest / 12)
 print "Present cost of mortgage to me is:", present_cost_of_morgage
 
 present_cost_of_buying_flat = present_cost_of_morgage + first_installment_budget
 print "Present cost of buying flat (inc. first install):", present_cost_of_buying_flat
 
-## DEBUG: Above seems correct.
-print 
-## DEBUG: below seems incorrect.
-
-# present value of flat
+# present value of flat, using the "frying formula", i.e. assume property appreciation != interest rates I can get
 future_value_of_flat_when_mortgage_ends = future_value_of_present_sum(current_price_of_flat, mortgage_term_in_years, property_avg_yearly_appreciation_rate_after_x_years)
-print "DEBUG, ", future_value_of_flat_when_mortgage_ends
+present_value_of_flat_if_sold_right_after_mortgage = present_value_of_future_sum(future_value_of_flat_when_mortgage_ends, mortgage_term_in_years, my_yearly_interest)
 
-present_value_of_flat = present_value_of_future_sum(future_value_of_flat_when_mortgage_ends, mortgage_term_in_years, my_yearly_interest)
-print "Present value of flat:", present_value_of_flat         # XXX: TODO: understand how this value relates to my_interest and property_appreciation!!!!!!!
+# print "DEBUG, ", future_value_of_flat_when_mortgage_ends
+print "Present value of flat if sold right after mortgage:", present_value_of_flat_if_sold_right_after_mortgage, "(not incl. value of having a home)"
 
+# FIXME: the N is different from mortgage term!
+# FIXME: the N is different from mortgage term!
+# FIXME: the N is different from mortgage term!
+# FIXME: the N is different from mortgage term!
+net_value_of_mortgaging = present_value_of_flat_if_sold_right_after_mortgage + utility_of_living_for_n_years - present_cost_of_buying_flat
 
+print "Net value of mortgaging:", net_value_of_mortgaging
 
+# Print the values after N years for comparison
 
+print "INFO: Nominal total sum paid to bank over N years:", mortgage_term_in_months * monthly_morgage_payment_budget
 
-# print "DEBUG: Total nominal sum paid to bank", monthly_morgage_payment_budget * mortgage_term_in_months
-
-#future_nominal_value_of_flat_after_n_years = future_value_of_present_sum(current_price_of_flat, number_of_years_of_renting, property_yearly_appreciation_rate)
-#present_value_of_flat_after_n_years = present_value_of_future_sum(future_nominal_value_of_flat_after_n_years, number_of_years_of_renting, my_yearly_interest)
-
-# print "current value of buying outright, and selling after", : ", present_value_of_flat_after_n_years - cost_of_buying_outright
+print "INFO: expected future nominal value of property after N years:", future_value_of_present_sum(current_price_of_flat, mortgage_term_in_years, property_avg_yearly_appreciation_rate_after_x_years)
