@@ -21,6 +21,7 @@ of the software. All other rights are expressly reserved.
 # - "Rates" (chai heung) not included. Management fees not included.
 # - Administrative costs not included.
 # - Risks of renting to other people not included.
+# - Opportunity costs of other investment options not included.
 ### Other omissions might be here too.
 
 ############################################
@@ -29,12 +30,12 @@ of the software. All other rights are expressly reserved.
 # For fixed monthly payment
 # Ref: http://en.wikipedia.org/wiki/Mortgage_calculator#Monthly_payment_formula
 
-my_yearly_interest = VARIABLE(0.02, "my interest")                  # this is the interest rate I can get from safe deposit/investments
-bank_yearly_interest = VARIABLE(0.08, "bank interest")              # this is the interest my bank charges me
-current_market_value_of_flat = VARIABLE(3000 * 600, "market value of flat now")  # for the flat to be purchased. Not necessarily same as the flat for rent.
-property_avg_yearly_appreciation_rate_after_x_years = VARIABLE(0.02) # this is likely a wild guess, it should be safely set to be inflation rate
-first_installment_budget = VARIABLE(30*10000, "first installment")  # money I have now to put into first installment
-monthly_morgage_payment_budget = VARIABLE(15000, "monthly mortgage payment") # money I can pay monthly for morgage payments
+my_yearly_interest = VARIABLE(0.01, "my interest")                  # this is the interest rate I can get from safe deposit/investments
+bank_yearly_interest = VARIABLE(0.05, "bank interest")              # this is the interest my bank charges me
+current_market_value_of_flat = VARIABLE(300, "market value of flat now")  # for the flat to be purchased. Not necessarily same as the flat for rent.
+property_avg_yearly_appreciation_rate_after_x_years = VARIABLE(0.01) # this is likely a wild guess, it should be safely set to be inflation rate
+first_installment_budget = VARIABLE(100, "first installment")  # money I have now to put into first installment
+monthly_morgage_payment_budget = VARIABLE(3, "monthly mortgage payment") # money I can pay monthly for morgage payments
 
 principal_borrowed_from_bank = current_market_value_of_flat - first_installment_budget
 
@@ -79,7 +80,7 @@ print "Present value of flat if sold right after mortgage:", present_value_of_fl
 # If used as own home, this value should be the present value of utility of having a home for N years
 # If used as own home, but I can live under worse conditions, then this value should be the rent of a flat I can minimally bear.
 
-monthly_rent_of_flat = VARIABLE(5000, "monthly rent of flat (see comments!)")  # the value and subject of renting depends on how we want to use this variable.
+monthly_rent_of_flat = VARIABLE(0.6, "monthly rent of flat (see comments!)")  # the value and subject of renting depends on how we want to use this variable.
 present_utility_value_of_the_purchased_flat_for_n_years = mortgage_term_in_months * monthly_rent_of_flat
 
 print "Present utility value of rent for", mortgage_term_in_years, "years: ", present_utility_value_of_the_purchased_flat_for_n_years
