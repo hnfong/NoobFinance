@@ -1,0 +1,17 @@
+Data in yahoo_eod/data are downloaded directly from Yahoo Finance using the
+scripts. I make no claim whatsoever regarding those data.
+
+Author: Sidney Fong
+
+The Author does not claim any intellectual property rights over the contents of
+this repository. The Author does not restrict the use of the contents of this
+repository in any way, as long as they are for lawful purposes, and provided
+that you agree to the following disclaimer:
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
