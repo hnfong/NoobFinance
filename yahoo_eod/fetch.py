@@ -22,7 +22,13 @@ for stock in stocks:
     print "Fetching: %s..." % stock
     f = open(filename, "w")
     url = 'http://ichart.finance.yahoo.com/table.csv?s=%s' % stock
-    f.write(urllib.urlopen(url).read())
+    try:
+        f.write(urllib.urlopen(url).read())
+    except KeyboardInterrupt:
+        f.close()
+        print "Removing ", filename
+        os.unlink(filename)
+        break
     f.close()
 
     os.system('git add "%s"; git commit -m "Data for %s"' % (filename, stock))
