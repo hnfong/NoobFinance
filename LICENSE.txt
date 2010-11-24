@@ -5,8 +5,8 @@ Author: Sidney Fong
 
 The Author does not claim any intellectual property rights over the contents of
 this repository. The Author does not restrict the use of the contents of this
-repository in any way, as long as they are for lawful purposes, and provided
-that you agree to the following disclaimer:
+repository in any way, as long as they are used lawfully for lawful purposes,
+and provided that you agree to the following disclaimer:
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
