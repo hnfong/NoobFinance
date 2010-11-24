@@ -8,7 +8,7 @@ hkex = open("hkex.list", "r").read().strip()
 
 stocks = [ v.split("=")[0] for v in hkex.split("\n") ]
 
-max_iterations = 100
+max_iterations = 1000
 
 for stock in stocks:
     filename = "data/%s" % stock
