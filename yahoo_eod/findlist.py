@@ -43,9 +43,8 @@ for i in xrange(0, 90):
             continue
 
         # If "more information" is empty, probably not a stock (warrants, cbcs,
-        # etfs, etc.). The ETFs have lower case characters, and I want to keep
-        # those.
-        if values[3] == '""' and re.search(r'[a-z]', values[1]) is None:
+        # etfs, etc.).
+        if values[3] == '""':
             print "not cepr or whatever for ", values
 
         f.write("%s=%s\n" % ( values[0][1:-1], values[1] ))

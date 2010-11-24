@@ -23,12 +23,18 @@ conn.execute("""
         PRIMARY KEY(symbol, day) ON CONFLICT REPLACE
     );""")  ## TODO: add indexes
 
+conn.execute("""
+    CREATE TABLE FailedQuotes (
+        symbol VARCHAR
+    );""")
+
 for infile in glob.glob(os.path.join('data', '*.HK')):
     lines = open(infile, "r").read().strip().split("\n")
     symbol_ = infile[5:-3]
 
     if lines[0] != 'Date,Open,High,Low,Close,Volume,Adj Close':
-        raise "%s has unexpected first line!" % infile
+        conn.execute("INSERT INTO FailedQuotes VALUES(?)", ( symbol_, ))
+        continue
 
     lines = lines[1:]
     print "importing from %s as \"%s\"" % (infile, symbol_)
@@ -36,6 +42,8 @@ for infile in glob.glob(os.path.join('data', '*.HK')):
         try:
             date_, open_, high_, low_, close_, volume_, adj_ = line.split(",")
         except Exception:
-            print "error reading: ", infile
+            raise "error reading: ", infile
 
         conn.execute("INSERT INTO EndOfDayData VALUES(?, ?, ?, ?, ?, ?, ?, ?)", ( symbol_, date_, open_, high_, low_, close_, volume_, adj_))
+
+conn.commit()
