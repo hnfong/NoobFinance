@@ -38,6 +38,9 @@ for i in xrange(0, 90):
         if len(values) != 4:
             raise Exception("Not 3 values in each line: " + line)
 
+        # check whether symbol is valid
+        if values[1] == '""' or values[1] == '': continue
+
         # check whether the quote is valid, or is still actively trading
         if values[2] == '"N/A"' or not valid_date(values[2]) or values[0] == values[1]:
             continue
